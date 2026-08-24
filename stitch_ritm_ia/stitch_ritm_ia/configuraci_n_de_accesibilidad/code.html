@@ -1,0 +1,433 @@
+<!DOCTYPE html><html class="light" lang="es"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>EduAndalucía - Ajustes de Accesibilidad</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,700;1,400&amp;family=JetBrains+Mono:wght@500&amp;family=OpenDyslexic&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#002115",
+                    "surface-tint": "#006c4d",
+                    "surface-bright": "#f9f9fc",
+                    "on-tertiary-fixed": "#131e17",
+                    "primary-container": "#006d4e",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#89bcff",
+                    "on-tertiary-fixed-variant": "#3e4a41",
+                    "surface-container-high": "#e8e8ea",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "outline": "#6f7a73",
+                    "on-tertiary-container": "#d0ddd1",
+                    "on-secondary-fixed": "#001c38",
+                    "surface-dim": "#dadadc",
+                    "background": "#f9f9fc",
+                    "on-error": "#ffffff",
+                    "secondary": "#27609d",
+                    "tertiary-container": "#566259",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#3f4a42",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eeeef0",
+                    "surface": "#f9f9fc",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#d9e6da",
+                    "primary-fixed": "#9df4cd",
+                    "on-primary-fixed-variant": "#005139",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-background": "#1a1c1e",
+                    "on-primary-container": "#94ebc4",
+                    "inverse-primary": "#81d7b1",
+                    "primary": "#00523a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "secondary-fixed": "#d3e4ff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "outline-variant": "#bec9c1",
+                    "surface-variant": "#e2e2e5",
+                    "primary-fixed-dim": "#81d7b1",
+                    "on-surface-variant": "#3f4943",
+                    "on-secondary-fixed-variant": "#004882",
+                    "on-secondary-container": "#004a86",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#bdcabe",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f3f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "hit-area-min": "48px",
+                    "unit": "8px",
+                    "adhd-section-gap": "64px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-adhd": ["Atkinson Hyperlegible Next"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-base": ["Atkinson Hyperlegible Next"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Plus Jakarta Sans"],
+                    "dyslexic": ["OpenDyslexic", "sans-serif"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-adhd": ["20px", {"lineHeight": "36px", "letterSpacing": "0.03em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-base": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        
+        .preview-canvas {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Accessibility Overlays simulation */
+        .protanopia { filter: url('#protanopia-filter'); }
+        .deuteranopia { filter: url('#deuteranopia-filter'); }
+        
+        .dyslexia-font { font-family: 'OpenDyslexic', sans-serif !important; }
+        
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { 
+            background: #bec9c1; 
+            border-radius: 10px;
+        }
+
+        .focus-mode-active .adhd-spacer {
+            height: 64px;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-base text-body-base overflow-x-hidden min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-margin-mobile md:px-gutter h-hit-area-min z-50 fixed top-0 left-0 right-0">
+<div class="flex items-center gap-4">
+<button class="md:hidden p-2 hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed">RITM-IA</h1>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg" href="#">Panel</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg" href="#">Unidades</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary px-3 py-2" href="#">Accesibilidad</a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-3 hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full" title="Contraste">
+<span class="material-symbols-outlined">settings_accessibility</span>
+</button>
+<button class="p-3 hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors rounded-full" id="theme-toggle" title="Modo Oscuro">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-outline-variant">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a diverse young student smiling against a soft green gradient background. The lighting is bright and optimistic, reflecting a modern educational atmosphere with high clarity and institutional minimalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjI0MmQav-9Kt85Nn4YozMRjwGI95ueLrjfcU03CW8G__IeigOQCs8YflZEPLNPMP79C8RP4PzdwjGg5F3sv9i2b0-_X4LLRtUwwcG3BDSrkrDj_OdiDUelpaOtjC_bmbocKeS9EcbkBoJYuVtarb_kmmIUgS4TQkdhY4ZAyy1mCikUu9Tby1Hf59DVNCc2ArkDwWE7OeMkRU2ksKguC9e1kM4FJ62L4Mjt5MCeNtJlUzD4SbW6-DXygjExeW97AP2GFUVDT0U7Go">
+</div>
+</div>
+</header>
+<div class="flex pt-16 min-h-screen">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-64px)] w-64 fixed left-0 top-16 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline py-unit gap-2 z-40 overflow-y-auto custom-scrollbar">
+<div class="px-6 py-4 mb-4">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary text-3xl">school</span>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">RITM-IA</h2>
+</div>
+<p class="text-on-surface-variant text-sm opacity-80">IES Andalucía</p>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">dashboard</span>
+<span class="">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">menu_book</span>
+<span class="">Units</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">local_activity</span>
+<span class="">Activities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined group-hover:scale-110 transition-transform">insights</span>
+<span class="">Progress</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg transition-all group shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings_accessibility</span>
+<span class="">Accesibilidad</span>
+</a>
+</nav>
+<div class="mt-auto px-4 pb-6 border-t border-outline-variant/30 pt-4">
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="">Asistente AI</span>
+</button>
+</div>
+</aside>
+<!-- Main Content (Settings Canvas) -->
+<main class="flex-1 md:ml-64 p-margin-mobile md:p-gutter max-w-container-max mx-auto w-full">
+<header class="mb-10">
+<h2 class="font-display-lg text-display-lg font-extrabold text-on-background mb-2">Personaliza tu Aprendizaje</h2>
+<p class="text-on-surface-variant max-w-2xl">Ajusta la interfaz para que se adapte perfectamente a tus necesidades visuales y cognitivas. Estos cambios se aplicarán a toda la plataforma.</p>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<!-- Settings Panel -->
+<div class="lg:col-span-7 space-y-8">
+<!-- Font & Readability Section -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">format_size</span>
+<h3 class="font-headline-md text-headline-md font-bold">Tipografía y Lectura</h3>
+</div>
+<div class="space-y-6">
+<!-- Font Selection -->
+<div>
+<label class="block text-sm font-label-caps text-on-surface-variant mb-3">FUENTE ESPECIALIZADA</label>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<button class="font-btn p-4 border-2 border-primary rounded-lg text-left bg-primary-container/10 flex flex-col gap-1 transition-all" onclick="updateFont('standard')">
+<span class="font-bold">Atkinson Hyperlegible</span>
+<span class="text-xs opacity-70">Alta legibilidad institucional</span>
+</button>
+<button class="font-btn p-4 border border-outline-variant rounded-lg text-left hover:bg-surface-container transition-all flex flex-col gap-1 font-dyslexic" onclick="updateFont('dyslexic')">
+<span class="font-bold">OpenDyslexic</span>
+<span class="text-xs opacity-70">Diseñada para dislexia</span>
+</button>
+</div>
+</div>
+<!-- Sliders -->
+<div class="space-y-4">
+<div>
+<div class="flex justify-between mb-2">
+<label class="text-sm font-label-caps text-on-surface-variant">TAMAÑO DE TEXTO</label>
+<span class="font-bold text-primary" id="text-size-val">100%</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" id="size-slider" max="150" min="80" type="range" value="100">
+</div>
+<div>
+<div class="flex justify-between mb-2">
+<label class="text-sm font-label-caps text-on-surface-variant">ESPACIADO ENTRE LÍNEAS</label>
+<span class="font-bold text-primary" id="line-height-val">1.5x</span>
+</div>
+<input class="w-full h-2 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary" id="height-slider" max="25" min="12" type="range" value="15">
+</div>
+</div>
+</div>
+</section>
+<!-- Color & Contrast Section -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">palette</span>
+<h3 class="font-headline-md text-headline-md font-bold">Color y Contraste</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div>
+<label class="block text-sm font-label-caps text-on-surface-variant mb-3">MODO DE COLOR</label>
+<div class="flex bg-surface-container rounded-full p-1 w-fit">
+<button class="px-6 py-2 rounded-full font-bold bg-white text-primary shadow-sm transition-all flex items-center gap-2" onclick="setTheme('light')">
+<span class="material-symbols-outlined text-sm">light_mode</span> Claro
+                                    </button>
+<button class="px-6 py-2 rounded-full font-bold text-on-surface-variant hover:text-on-surface transition-all flex items-center gap-2" onclick="setTheme('dark')">
+<span class="material-symbols-outlined text-sm">dark_mode</span> Oscuro
+                                    </button>
+</div>
+</div>
+<div>
+<label class="block text-sm font-label-caps text-on-surface-variant mb-3">MODO DALTONISMO</label>
+<select class="w-full p-3 bg-surface border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all" id="colorblind-mode">
+<option value="none">Ninguno (Estándar)</option>
+<option value="protanopia">Protanopia (Rojo-Verde)</option>
+<option value="deuteranopia">Deuteranopia (Rojo-Verde)</option>
+<option value="tritanopia">Tritanopia (Azul-Amarillo)</option>
+</select>
+</div>
+</div>
+</section>
+<!-- Focus & ADHD Section -->
+<section class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl shadow-sm">
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">center_focus_strong</span>
+<h3 class="font-headline-md text-headline-md font-bold">Modo de Enfoque (TDAH)</h3>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" id="adhd-toggle" type="checkbox">
+<div class="w-14 h-7 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<p class="text-on-surface-variant text-sm mb-6">Aumenta el espaciado entre módulos y oculta elementos de distracción para mejorar la concentración.</p>
+<div class="grid grid-cols-2 gap-4">
+<div class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg opacity-50 transition-opacity" id="focus-opt-1">
+<span class="material-symbols-outlined text-primary">visibility_off</span>
+<span class="text-sm font-medium">Ocultar notificaciones</span>
+</div>
+<div class="flex items-center gap-3 p-3 border border-outline-variant rounded-lg opacity-50 transition-opacity" id="focus-opt-2">
+<span class="material-symbols-outlined text-primary">height</span>
+<span class="text-sm font-medium">Espaciado extra</span>
+</div>
+</div>
+</section>
+</div>
+<!-- Preview Panel -->
+<div class="lg:col-span-5 sticky top-24">
+<div class="bg-white dark:bg-surface-container-low border-2 border-primary rounded-2xl shadow-xl overflow-hidden">
+<div class="bg-primary px-6 py-3 flex justify-between items-center">
+<span class="text-on-primary font-bold text-sm tracking-wider">VISTA PREVIA EN TIEMPO REAL</span>
+<span class="material-symbols-outlined text-on-primary text-xl">remove_red_eye</span>
+</div>
+<div class="preview-canvas p-8 min-h-[400px]" id="preview-content">
+<h4 class="font-display-lg text-headline-md mb-4 text-on-background">La Geografía de Andalucía</h4>
+<div class="adhd-spacer transition-all h-0"></div>
+<p class="text-on-surface mb-4 leading-relaxed transition-all" id="preview-text">
+                                Andalucía es una comunidad autónoma española situada en el sur de la península ibérica. Es la región más poblada de España y la segunda más extensa. Su relieve es variado, desde el valle del Guadalquivir hasta las cumbres de Sierra Nevada.
+                            </p>
+<div class="adhd-spacer transition-all h-0"></div>
+<div class="grid grid-cols-2 gap-4 mb-6">
+<div class="h-24 rounded-lg bg-primary-container/20 flex items-center justify-center border border-primary/20">
+<span class="text-primary font-bold">Mapa Físico</span>
+</div>
+<div class="h-24 rounded-lg bg-secondary-container/20 flex items-center justify-center border border-secondary/20">
+<span class="text-secondary font-bold">Clima</span>
+</div>
+</div>
+<button class="w-full h-hit-area-min bg-primary text-on-primary rounded-xl font-bold active:scale-95 transition-all">
+                                Continuar Unidad
+                            </button>
+</div>
+</div>
+<!-- Visual Aid Explanation -->
+<div class="mt-6 p-4 bg-tertiary-fixed text-on-tertiary-fixed rounded-xl flex gap-3 items-start">
+<span class="material-symbols-outlined">info</span>
+<p class="text-sm italic">"Tus ajustes se sincronizan automáticamente con tu cuenta de RITM-IA para que los tengas en cualquier dispositivo."</p>
+</div>
+</div>
+</div>
+<div class="mt-12 flex justify-end gap-4 border-t border-outline-variant pt-8">
+<button class="px-8 py-3 text-primary font-bold hover:bg-surface-container transition-colors rounded-xl">
+                    Restaurar valores
+                </button>
+<button class="px-10 py-3 bg-primary text-on-primary font-bold rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all">
+                    Guardar Cambios
+                </button>
+</div>
+</main>
+</div>
+<!-- Colorblind SVG Filters (Hidden) -->
+<svg style="display:none">
+<defs>
+<filter id="protanopia-filter">
+<feColorMatrix type="matrix" values="0.567, 0.433, 0, 0, 0 0.558, 0.442, 0, 0, 0 0, 0.242, 0.758, 0, 0 0, 0, 0, 1, 0"></feColorMatrix>
+</filter>
+<filter id="deuteranopia-filter">
+<feColorMatrix type="matrix" values="0.625, 0.375, 0, 0, 0 0.7, 0.3, 0, 0, 0 0, 0.3, 0.7, 0, 0 0, 0, 0, 1, 0"></feColorMatrix>
+</filter>
+</defs>
+</svg>
+<script>
+        // DOM Elements
+        const sizeSlider = document.getElementById('size-slider');
+        const heightSlider = document.getElementById('height-slider');
+        const previewContent = document.getElementById('preview-content');
+        const previewText = document.getElementById('preview-text');
+        const adhdToggle = document.getElementById('adhd-toggle');
+        const colorblindSelect = document.getElementById('colorblind-mode');
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Font Settings Logic
+        function updateFont(type) {
+            const buttons = document.querySelectorAll('.font-btn');
+            buttons.forEach(btn => btn.classList.remove('border-primary', 'bg-primary-container/10'));
+            buttons.forEach(btn => btn.classList.add('border-outline-variant'));
+            
+            const activeBtn = event.currentTarget;
+            activeBtn.classList.remove('border-outline-variant');
+            activeBtn.classList.add('border-primary', 'bg-primary-container/10');
+
+            if (type === 'dyslexic') {
+                previewContent.classList.add('dyslexia-font');
+            } else {
+                previewContent.classList.remove('dyslexia-font');
+            }
+        }
+
+        // Slider Logic
+        sizeSlider.addEventListener('input', (e) => {
+            const val = e.target.value;
+            document.getElementById('text-size-val').innerText = `${val}%`;
+            previewContent.style.fontSize = `${(val / 100) * 18}px`;
+        });
+
+        heightSlider.addEventListener('input', (e) => {
+            const val = e.target.value / 10;
+            document.getElementById('line-height-val').innerText = `${val}x`;
+            previewText.style.lineHeight = val;
+        });
+
+        // ADHD Mode Logic
+        adhdToggle.addEventListener('change', (e) => {
+            const opt1 = document.getElementById('focus-opt-1');
+            const opt2 = document.getElementById('focus-opt-2');
+            const spacers = document.querySelectorAll('.adhd-spacer');
+
+            if (e.target.checked) {
+                opt1.classList.remove('opacity-50');
+                opt2.classList.remove('opacity-50');
+                spacers.forEach(s => s.style.height = '64px');
+                document.body.classList.add('focus-mode-active');
+            } else {
+                opt1.classList.add('opacity-50');
+                opt2.classList.add('opacity-50');
+                spacers.forEach(s => s.style.height = '0px');
+                document.body.classList.remove('focus-mode-active');
+            }
+        });
+
+        // Colorblind Filter Logic
+        colorblindSelect.addEventListener('change', (e) => {
+            previewContent.classList.remove('protanopia', 'deuteranopia');
+            if (e.target.value !== 'none') {
+                previewContent.classList.add(e.target.value);
+            }
+        });
+
+        // Theme Toggle Logic
+        function setTheme(mode) {
+            if (mode === 'dark') {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.documentElement.classList.toggle('dark');
+        });
+    </script>
+
+
+</body></html>

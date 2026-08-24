@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RITM-IA | Gestión de Asignaturas e IA Adaptativa</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-lowest": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "outline": "#6f7a71",
+                    "primary-container": "#006b3f",
+                    "primary": "#00502e",
+                    "on-tertiary-fixed": "#301400",
+                    "on-error": "#ffffff",
+                    "surface-container-high": "#ebe8e1",
+                    "error": "#ba1a1a",
+                    "on-secondary-fixed-variant": "#00522d",
+                    "on-surface-variant": "#3f4941",
+                    "inverse-on-surface": "#f3f0e9",
+                    "surface-container-highest": "#e5e2db",
+                    "outline-variant": "#bec9bf",
+                    "on-tertiary": "#ffffff",
+                    "background": "#fcf9f2",
+                    "secondary-fixed": "#64fea6",
+                    "inverse-primary": "#81d9a2",
+                    "on-tertiary-container": "#ffcbaa",
+                    "tertiary-fixed": "#ffdcc6",
+                    "on-secondary-fixed": "#00210f",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f6f3ec",
+                    "on-secondary": "#ffffff",
+                    "surface": "#fcf9f2",
+                    "primary-fixed": "#9df5bd",
+                    "secondary": "#006d3d",
+                    "surface-variant": "#e5e2db",
+                    "on-background": "#1c1c18",
+                    "inverse-surface": "#31312c",
+                    "surface-container": "#f1eee7",
+                    "surface-dim": "#dcdad3",
+                    "on-surface": "#1c1c18",
+                    "surface-bright": "#fcf9f2",
+                    "on-primary-container": "#91e9b1",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#81d9a2",
+                    "tertiary-container": "#934800",
+                    "on-secondary-container": "#007240",
+                    "on-tertiary-fixed-variant": "#723700",
+                    "on-primary-fixed-variant": "#00522f",
+                    "secondary-fixed-dim": "#41e18c",
+                    "tertiary": "#6f3500",
+                    "on-primary-fixed": "#002110",
+                    "surface-tint": "#046d40",
+                    "secondary-container": "#61fba3",
+                    "tertiary-fixed-dim": "#ffb785"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "stack-gap": "1rem",
+                    "container-max": "1440px",
+                    "sidebar-width": "280px",
+                    "margin-mobile": "16px",
+                    "section-gap": "2.5rem",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "body-lg": ["Atkinson Hyperlegible Next"],
+                    "label-sm": ["Atkinson Hyperlegible Next"],
+                    "display-lg": ["Atkinson Hyperlegible Next"],
+                    "body-md": ["Atkinson Hyperlegible Next"],
+                    "headline-lg": ["Atkinson Hyperlegible Next"],
+                    "title-md": ["Atkinson Hyperlegible Next"],
+                    "headline-lg-mobile": ["Atkinson Hyperlegible Next"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "700"}],
+                    "title-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .progress-bar-animate {
+            animation: progress-slide 2s infinite linear;
+            background-image: linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0.15) 75%, transparent 75%, transparent);
+            background-size: 1rem 1rem;
+        }
+        @keyframes progress-slide {
+            from { background-position: 1rem 0; }
+            to { background-position: 0 0; }
+        }
+        body {
+            font-family: 'Atkinson Hyperlegible Next', sans-serif;
+            background-color: #fcf9f2;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1eee7;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bec9bf;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col md:flex-row">
+<!-- Sidebar Navigation -->
+<aside class="hidden md:flex flex-col h-screen sticky left-0 top-0 w-[280px] py-6 px-4 bg-surface-container-low border-r border-outline-variant transition-all duration-200">
+<div class="mb-10 px-4">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">RITM-IA</h1>
+<p class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant opacity-70">Portal Docente</p>
+</div>
+<nav class="flex-1 space-y-2">
+<a class="flex items-center gap-3 bg-primary text-on-primary rounded-lg px-4 py-3 font-bold transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>Mis Asignaturas</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span>Banco de Recursos</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+<span>IA Adaptativa</span>
+</a>
+<a class="flex items-center gap-3 text-on-surface-variant px-4 py-3 hover:bg-surface-container-high transition-colors transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Configuración</span>
+</a>
+</nav>
+<div class="mt-auto px-2">
+<button class="w-full py-3 px-4 bg-secondary-container text-on-secondary-container font-bold rounded-xl flex items-center justify-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span>Nueva Unidad</span>
+</button>
+<div class="mt-6 flex items-center gap-3 p-3 rounded-xl bg-surface-container-highest/30">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-fixed overflow-hidden">
+<img alt="Perfil docente" class="object-cover w-full h-full" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAY2xiXD7ke4WXmQsv_-_qTe7LUxmPpCvOkixJ5qdf9oD_MSGPF6mjAx4gw2Cka2Wg9QuYL7rJEAgSF9qp_LLDWmXTyMoFJqbemtT0k9HjdDBUhudkYyo-ZKY3JeQzpKjbaOGYdgQ_6Ax6L9X0OklX7vdU0A2TM4AB8XN_HLTNYGOJLrwONNWO-Ui1-VwQUm34QNRPX04qIy_zX1uZL72IfT5OjL97fKbFfT9xsWA-h6BzBzUIJRb_Qv9VIVWZmq8ttZmGFFlZ3dV8"/>
+</div>
+<div>
+<p class="font-label-sm text-on-surface font-bold">Docente Conectado</p>
+<p class="text-xs text-on-surface-variant">IES Andalucía</p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col min-w-0">
+<!-- Top Navigation -->
+<header class="w-full h-16 sticky top-0 z-40 bg-surface shadow-sm flex items-center px-6 border-b border-outline-variant/30">
+<div class="flex justify-between items-center w-full max-w-[1440px] mx-auto">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-full bg-surface-container-low border-none focus:ring-2 focus:ring-primary text-body-md" placeholder="Buscar unidades, recursos..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-highest/50 rounded-full transition-all text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<button class="p-2 hover:bg-surface-container-highest/50 rounded-full transition-all text-on-surface-variant relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<button class="px-4 py-1.5 text-on-surface-variant font-label-sm hover:bg-surface-container-highest/50 rounded-full transition-all">Ayuda</button>
+<button class="px-4 py-1.5 bg-primary text-on-primary font-label-sm rounded-full transition-all active:opacity-80">Perfil</button>
+</div>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-6 md:p-10 max-w-[1440px] mx-auto w-full space-y-8">
+<!-- Breadcrumbs -->
+<nav class="flex items-center gap-2 text-on-surface-variant font-label-sm">
+<a class="hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="material-symbols-outlined text-[18px]" data-icon="home">home</span>
+                Inicio
+            </a>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-bold">Matemáticas - 2º ESO</span>
+</nav>
+<header class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-on-surface">Gestión de Asignatura</h2>
+<p class="text-body-lg text-on-surface-variant">Personaliza y adapta tus materiales educativos con Inteligencia Artificial.</p>
+</div>
+<div class="flex gap-3">
+<button class="px-6 py-2.5 border-2 border-primary text-primary font-bold rounded-lg hover:bg-primary/5 transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
+                    Exportar Curso
+                </button>
+</div>
+</header>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Sidebar: Context & Files -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Current Material -->
+<div class="bg-surface-container-low rounded-2xl border border-outline-variant p-5 space-y-4">
+<h3 class="font-title-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="description">description</span>
+                        Material de Base
+                    </h3>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-4 flex items-center gap-4">
+<div class="w-12 h-12 bg-red-50 text-red-600 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-bold text-sm truncate">Tema_Trigonometria_Standard.pdf</p>
+<p class="text-xs text-on-surface-variant">4.2 MB • Subido hoy</p>
+</div>
+<button class="p-2 hover:bg-surface-container-highest rounded-full transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="close">close</span>
+</button>
+</div>
+<button class="w-full py-3 border-2 border-dashed border-outline-variant rounded-xl text-on-surface-variant text-sm font-bold flex items-center justify-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                        Añadir otro documento
+                    </button>
+</div>
+<!-- Units List Mini -->
+<div class="space-y-3">
+<h3 class="font-label-sm text-on-surface-variant px-2 uppercase tracking-widest">Unidades Activas</h3>
+<div class="space-y-2">
+<div class="bg-white border-l-4 border-primary p-3 rounded-r-xl shadow-sm border border-outline-variant flex items-center justify-between">
+<span class="font-bold text-sm">UT1: Trigonometría</span>
+<span class="material-symbols-outlined text-primary text-sm" data-icon="check_circle">check_circle</span>
+</div>
+<div class="bg-surface-container-lowest p-3 rounded-xl border border-outline-variant flex items-center justify-between opacity-70">
+<span class="font-bold text-sm">UT2: Álgebra Lineal</span>
+<span class="material-symbols-outlined text-on-surface-variant text-sm" data-icon="circle">circle</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Panel: Advanced AI Configuration -->
+<section class="lg:col-span-8 space-y-6">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-3xl overflow-hidden shadow-sm">
+<!-- Workflow Header -->
+<div class="bg-primary p-6 md:p-8 text-on-primary">
+<div class="flex items-center gap-4 mb-3">
+<div class="w-12 h-12 bg-on-primary/10 rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h3 class="font-headline-lg text-title-md">Configuración de Generación IA</h3>
+<p class="text-sm opacity-80">Define los parámetros de personalización para el nuevo recurso didáctico.</p>
+</div>
+</div>
+</div>
+<div class="p-6 md:p-8 space-y-10">
+<!-- Step 1: Prompt Docente -->
+<div class="space-y-4">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<label class="font-bold text-lg" for="teacher-prompt">Prompt del Docente</label>
+</div>
+<p class="text-sm text-on-surface-variant leading-relaxed">
+                                Indica instrucciones específicas al modelo para guiar el estilo, tono o enfoque del material generado.
+                            </p>
+<textarea class="w-full min-h-[120px] p-4 rounded-2xl bg-surface-container-low border-outline-variant focus:border-primary focus:ring-primary text-body-md" id="teacher-prompt" placeholder='Ej: "Simplifica los conceptos de trigonometría usando ejemplos de navegación marítima. Mantén un tono motivador y añade un glosario visual al final."'></textarea>
+<div class="flex flex-wrap gap-2">
+<button class="text-[12px] bg-primary-container/20 text-primary-container px-3 py-1 rounded-full border border-primary-container/30 hover:bg-primary-container/30 transition-colors">Enfoque práctico</button>
+<button class="text-[12px] bg-primary-container/20 text-primary-container px-3 py-1 rounded-full border border-primary-container/30 hover:bg-primary-container/30 transition-colors">Tono lúdico</button>
+<button class="text-[12px] bg-primary-container/20 text-primary-container px-3 py-1 rounded-full border border-primary-container/30 hover:bg-primary-container/30 transition-colors">Apoyo visual extra</button>
+</div>
+</div>
+<div class="space-y-6">
+<div class="flex p-1 bg-surface-container-low rounded-xl w-fit">
+<button class="px-6 py-2 rounded-lg font-bold text-sm transition-all bg-white shadow-sm text-primary" onclick="document.getElementById('student-selection-tab').classList.remove('hidden'); document.getElementById('rhythm-selection-tab').classList.add('hidden'); this.classList.add('bg-white', 'shadow-sm'); this.nextElementSibling.classList.remove('bg-white', 'shadow-sm');">
+      Seleccionar alumno
+    </button>
+<button class="px-6 py-2 rounded-lg font-bold text-sm transition-all text-on-surface-variant hover:text-primary" onclick="document.getElementById('rhythm-selection-tab').classList.remove('hidden'); document.getElementById('student-selection-tab').classList.add('hidden'); this.classList.add('bg-white', 'shadow-sm'); this.previousElementSibling.classList.remove('bg-white', 'shadow-sm');">
+      Seleccionar por ritmo
+    </button>
+</div>
+<div class="space-y-4" id="student-selection-tab">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<label class="font-bold text-lg">Selección de Alumnado</label>
+</div>
+<div class="relative">
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border-outline-variant rounded-xl text-sm" placeholder="Buscar alumnos..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-sm" data-icon="search">search</span>
+</div>
+<div class="bg-surface-container-low rounded-2xl border border-outline-variant max-h-48 overflow-y-auto custom-scrollbar">
+<div class="p-1 space-y-1">
+<label class="flex items-center gap-3 p-3 hover:bg-white rounded-xl cursor-pointer transition-colors">
+<input checked="" class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-primary-fixed text-[10px] flex items-center justify-center font-bold">ALL</div>
+<span class="text-sm font-bold">Todos los alumnos</span>
+</div>
+</label>
+<div class="h-px bg-outline-variant/20 mx-3"></div>
+<label class="flex items-center gap-3 p-3 hover:bg-white rounded-xl cursor-pointer transition-colors">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-secondary-fixed text-[10px] flex items-center justify-center font-bold">AG</div>
+<span class="text-sm">Alejandro G.</span>
+</div>
+</label>
+<label class="flex items-center gap-3 p-3 hover:bg-white rounded-xl cursor-pointer transition-colors">
+<input class="rounded text-primary focus:ring-primary" type="checkbox"/>
+<div class="flex items-center gap-2">
+<div class="w-7 h-7 rounded-full bg-tertiary-fixed text-[10px] flex items-center justify-center font-bold">MR</div>
+<span class="text-sm">María R.</span>
+</div>
+</label>
+</div>
+</div>
+</div>
+<div class="hidden space-y-4" id="rhythm-selection-tab">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined" data-icon="speed">speed</span>
+<label class="font-bold text-lg">Ritmo de Aprendizaje</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+<label class="relative flex flex-col gap-1 p-4 border border-outline-variant rounded-2xl cursor-pointer hover:border-primary bg-white transition-all group has-[:checked]:border-primary has-[:checked]:bg-primary-container/5">
+<input class="absolute top-4 right-4 w-5 h-5 text-primary focus:ring-primary" name="learning-pace" type="radio"/>
+<p class="font-bold text-sm">Refuerzo</p>
+<p class="text-xs text-on-surface-variant">Lento, detallado y simplificado.</p>
+</label>
+<label class="relative flex flex-col gap-1 p-4 border border-primary rounded-2xl cursor-pointer bg-primary-container/5 transition-all group">
+<input checked="" class="absolute top-4 right-4 w-5 h-5 text-primary focus:ring-primary" name="learning-pace" type="radio"/>
+<p class="font-bold text-sm">Estándar</p>
+<p class="text-xs text-on-surface-variant">Ritmo medio del currículo oficial.</p>
+</label>
+<label class="relative flex flex-col gap-1 p-4 border border-outline-variant rounded-2xl cursor-pointer hover:border-primary bg-white transition-all group has-[:checked]:border-primary has-[:checked]:bg-primary-container/5">
+<input class="absolute top-4 right-4 w-5 h-5 text-primary focus:ring-primary" name="learning-pace" type="radio"/>
+<p class="font-bold text-sm">Ampliación</p>
+<p class="text-xs text-on-surface-variant">Rápido, avanzado y con retos extra.</p>
+</label>
+</div>
+</div>
+</div>
+<!-- Generation Progress (Simulated) -->
+<div class="bg-surface-container-low rounded-2xl p-6 border border-outline-variant space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="cycle">cycle</span>
+</div>
+<div>
+<p class="font-bold text-sm">Preparando generación adaptada</p>
+<p class="text-xs text-on-surface-variant">Analizando documento base...</p>
+</div>
+</div>
+<span class="text-primary font-bold text-sm" id="progress-text">0%</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary transition-all duration-300 w-0" id="progress-bar"></div>
+</div>
+</div>
+<!-- Actions -->
+<div class="flex flex-col md:flex-row justify-end gap-4 pt-4">
+<button class="px-8 py-4 font-bold text-on-surface-variant hover:bg-surface-container-high rounded-2xl transition-all">Descartar Cambios</button>
+<button class="px-10 py-4 bg-primary text-on-primary font-bold rounded-2xl flex items-center justify-center gap-3 hover:shadow-lg hover:shadow-primary/20 transition-all active:scale-95 shadow-md" id="generate-btn">
+<span class="material-symbols-outlined" data-icon="auto_awesome">auto_awesome</span>
+                                Generar Material Adaptado
+                            </button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</div>
+</main>
+<!-- Mobile Navigation -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface shadow-[0_-2px_10px_rgba(0,0,0,0.05)] flex items-center justify-around px-4 z-50">
+<button class="flex flex-col items-center gap-1 text-primary">
+<span class="material-symbols-outlined" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+<span class="text-[10px] font-bold">Clases</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="text-[10px]">Recursos</span>
+</button>
+<div class="-mt-8 w-14 h-14 bg-primary rounded-full shadow-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="psychology">psychology</span>
+</div>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[10px]">Alertas</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px]">Ajustes</span>
+</button>
+</nav>
+<script>
+    const generateBtn = document.getElementById('generate-btn');
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    
+    generateBtn.addEventListener('click', () => {
+        generateBtn.disabled = true;
+        generateBtn.classList.add('opacity-70', 'cursor-not-allowed');
+        generateBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> Procesando...';
+        
+        let progress = 0;
+        const interval = setInterval(() => {
+            progress += Math.random() * 15;
+            if (progress >= 100) {
+                progress = 100;
+                clearInterval(interval);
+                generateBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Material Generado';
+                generateBtn.classList.replace('bg-primary', 'bg-secondary');
+                generateBtn.classList.remove('opacity-70', 'cursor-not-allowed');
+            }
+            progressBar.style.width = `${progress}%`;
+            progressText.innerText = `${Math.floor(progress)}%`;
+        }, 400);
+    });
+
+    // Dark mode toggle simulation (just visual for now)
+    const darkModeBtn = document.querySelector('[data-icon="contrast"]').parentElement;
+    darkModeBtn.addEventListener('click', () => {
+        document.documentElement.classList.toggle('dark');
+        // If dark theme values were available in config, we'd swap them here.
+    });
+</script>
+</body></html>

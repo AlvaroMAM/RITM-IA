@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EduAndalucía - Unidad 1: Planificación y Administración de Redes</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Atkinson+Hyperlegible+Next:wght@400;700&amp;family=JetBrains+Mono:wght@500&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@100..900&amp;family=JetBrains+Mono:wght@100..900&amp;family=Plus+Jakarta+Sans:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-fixed": "#002115",
+                    "surface-tint": "#006c4d",
+                    "surface-bright": "#f9f9fc",
+                    "on-tertiary-fixed": "#131e17",
+                    "primary-container": "#006d4e",
+                    "on-secondary": "#ffffff",
+                    "secondary-container": "#89bcff",
+                    "on-tertiary-fixed-variant": "#3e4a41",
+                    "surface-container-high": "#e8e8ea",
+                    "secondary-fixed-dim": "#a3c9ff",
+                    "outline": "#6f7a73",
+                    "on-tertiary-container": "#d0ddd1",
+                    "on-secondary-fixed": "#001c38",
+                    "surface-dim": "#dadadc",
+                    "background": "#f9f9fc",
+                    "on-error": "#ffffff",
+                    "secondary": "#27609d",
+                    "tertiary-container": "#566259",
+                    "on-error-container": "#93000a",
+                    "tertiary": "#3f4a42",
+                    "error": "#ba1a1a",
+                    "surface-container": "#eeeef0",
+                    "surface": "#f9f9fc",
+                    "on-tertiary": "#ffffff",
+                    "tertiary-fixed": "#d9e6da",
+                    "primary-fixed": "#9df4cd",
+                    "on-primary-fixed-variant": "#005139",
+                    "surface-container-highest": "#e2e2e5",
+                    "on-background": "#1a1c1e",
+                    "on-primary-container": "#94ebc4",
+                    "inverse-primary": "#81d7b1",
+                    "primary": "#00523a",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface": "#1a1c1e",
+                    "inverse-surface": "#2f3133",
+                    "secondary-fixed": "#d3e4ff",
+                    "inverse-on-surface": "#f0f0f3",
+                    "outline-variant": "#bec9c1",
+                    "surface-variant": "#e2e2e5",
+                    "primary-fixed-dim": "#81d7b1",
+                    "on-surface-variant": "#3f4943",
+                    "on-secondary-fixed-variant": "#004882",
+                    "on-secondary-container": "#004a86",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed-dim": "#bdcabe",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f3f6"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1280px",
+                    "hit-area-min": "48px",
+                    "unit": "8px",
+                    "adhd-section-gap": "64px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Plus Jakarta Sans"],
+                    "body-adhd": ["Atkinson Hyperlegible Next"],
+                    "headline-md": ["Plus Jakarta Sans"],
+                    "body-base": ["Atkinson Hyperlegible Next"],
+                    "label-caps": ["JetBrains Mono"],
+                    "display-lg": ["Plus Jakarta Sans"]
+            },
+            "fontSize": {
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-adhd": ["20px", {"lineHeight": "36px", "letterSpacing": "0.03em", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-base": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-caps": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                    "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            user-select: none;
+        }
+        body {
+            background-color: #f9f9fc;
+            -webkit-font-smoothing: antialiased;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #bec9c1;
+            border-radius: 10px;
+        }
+        .active-tab-glow {
+            box-shadow: 0 0 15px rgba(0, 82, 58, 0.1);
+        }
+        .adhd-mode {
+            line-height: 1.8 !important;
+            letter-spacing: 0.05em !important;
+        }
+        .adhd-mode p, .adhd-mode li {
+            font-family: 'Atkinson Hyperlegible Next', sans-serif !important;
+            font-size: 20px !important;
+        }
+    </style>
+</head>
+<body class="font-body-base text-on-background">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-margin-mobile md:px-gutter h-hit-area-min z-50 bg-surface dark:bg-surface-dim border-b border-outline-variant dark:border-outline fixed top-0 left-0">
+<div class="flex items-center gap-4">
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-primary-fixed">RITM-IA</h1>
+</div>
+<div class="hidden md:flex items-center gap-6 h-full">
+<nav class="flex h-full items-center gap-4">
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-4 h-full flex items-center" href="#">Explorar</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-4 h-full flex items-center" href="#">Mis Unidades</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant hover:bg-surface-container-low dark:hover:bg-surface-container-high transition-colors px-4 h-full flex items-center" href="#">Calendario</a>
+</nav>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined w-hit-area-min h-hit-area-min text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full" title="Accesibilidad">accessibility_new</button>
+<button class="material-symbols-outlined w-hit-area-min h-hit-area-min text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">settings_accessibility</button>
+<button class="material-symbols-outlined w-hit-area-min h-hit-area-min text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-full">dark_mode</button>
+<div class="ml-2 w-10 h-10 rounded-full overflow-hidden border border-outline-variant">
+<img alt="Student profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBfYDyl4Zw4X5c1Fdrz8ZhFDWfS4XjwmzIzL0WTJ_2_gZIstIaWtduC5gJZw6J8lDWjhpGq7NiVYTIQEC_CS-WEwo3q3-AK3RyTclLxSiJfiYknMZElmTH5SxRuUu8XTK5VGzCz18Hyq9QwvALrmq4hXe0GhoJ3QsJl2BD0pOIOH2Ny3B2SPt5Rl3MfCEIPLec-n2WwPXT2xtMj9k90mNrCXOkNgECf6MNN8s3_N9gftLrCuLEGOg1y00VkSRf6FgEfBnJv9W6l04E"/>
+</div>
+</div>
+</header>
+<div class="flex pt-[48px] h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="hidden md:flex flex-col h-[calc(100vh-48px)] w-64 bg-surface-container-low dark:bg-surface-container-lowest border-r border-outline-variant dark:border-outline py-unit gap-2 fixed left-0">
+<div class="px-4 py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">lan</span>
+<div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary leading-tight">ASIR Portal</h2>
+<p class="text-sm text-on-surface-variant">IES Andalucía</p>
+</div>
+</div>
+<nav class="flex-1 px-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg active-tab-glow" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="">Units</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">terminal</span>
+<span class="">Activities</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="">Progress</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">forum</span>
+<span class="">Messages</span>
+</a>
+</nav>
+<div class="px-4 py-4">
+<button class="w-full bg-primary text-white font-bold py-3 px-4 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">play_circle</span>
+                    Continuar Laboratorio
+                </button>
+</div>
+<div class="border-t border-outline-variant mt-auto px-2 py-4">
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all text-sm" href="#">
+<span class="material-symbols-outlined">smart_toy</span>
+<span class="">AI Assistant</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-all text-sm" href="#">
+<span class="material-symbols-outlined">help_outline</span>
+<span class="">Help</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-0 md:ml-64 flex flex-col md:flex-row overflow-hidden">
+<!-- Unit Canvas -->
+<section class="flex-1 overflow-y-auto custom-scrollbar bg-background p-margin-mobile md:p-gutter">
+<div class="max-w-4xl mx-auto space-y-gutter">
+<!-- Header Banner -->
+<div class="relative h-64 rounded-xl overflow-hidden shadow-sm group">
+<div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent z-10"></div>
+<img alt="Modern data center server racks" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBdbPbpARSN-MQn174k4tLrZzpTtFDxUy4YIBTW3vvKQLMg4j6mLTy3X3TO82b6MI2-eJNYG8XOl2K57-3niCy72cc7_KLGDMf9HmVORwoHnQos3Kb09YXWWDBTgvw4axOTlo9zjhcb6wlMyTSDdq-cwxUH3FuU3LwMtXanonpsOB6kTAsbQFs7AW_IUzhBQSXFhb75ICzIkxfjz7g8gfKn9fdmQOu71Dow0hGlP0TDD7xl_ieoS6FH-tDlt_SZobX6sDeRZCAMfqc"/>
+<div class="absolute bottom-0 left-0 p-6 z-20">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary text-white text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider">ADMINISTRACIÓN DE SISTEMAS INFORMÁTICOS EN RED (ASIR)</span>
+</div>
+<h2 class="font-display-lg text-white font-bold mb-1">Unidad 1: Planificación y Administración de Redes</h2>
+<p class="text-white/90 font-body-base">Fundamentos de diseño, topologías y gestión de infraestructuras críticas en red.</p>
+</div>
+</div>
+<!-- Main Bento Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Unit Progress (Sidebar-like Card) -->
+<div class="md:col-span-4 space-y-gutter">
+<div class="bg-surface-container-lowest border border-outline-variant p-6 rounded-xl">
+<h3 class="font-headline-md text-primary font-bold mb-4">Estado del Módulo</h3>
+<div class="flex items-center justify-between mb-2">
+<span class="text-sm font-bold text-on-surface-variant">Progreso Unidad</span>
+<span class="text-sm font-bold text-primary">65%</span>
+</div>
+<div class="w-full bg-surface-container-high h-3 rounded-full mb-6">
+<div class="bg-primary h-3 rounded-full" style="width: 65%;"></div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="text-sm font-medium">3/5 Temas completados</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<span class="text-sm font-medium">2/4 Prácticas de Lab</span>
+</div>
+</div>
+</div>
+<div class="bg-secondary-container/10 border border-secondary/20 p-6 rounded-xl">
+<h4 class="font-bold text-secondary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined">lightbulb</span>
+                                    Tip Profesional
+                                </h4>
+<p class="text-sm text-on-surface-variant">Recuerda que la capa 3 del modelo OSI es donde se gestiona el direccionamiento lógico (IP) y el enrutamiento.</p>
+</div>
+</div>
+<!-- Lessons & Activities Feed -->
+<div class="md:col-span-8 space-y-gutter">
+<!-- Lesson Section -->
+<div class="space-y-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">menu_book</span>
+                                        Lecciones Teóricas
+                                    </h3>
+<button class="text-primary text-sm font-bold hover:underline">Ver todas</button>
+</div>
+<!-- Lesson Cards -->
+<div class="space-y-3">
+<div class="group bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4 hover:border-primary transition-all cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">layers</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">1.1 Modelos de red y protocolos (OSI/TCP-IP)</h4>
+<p class="text-sm text-on-surface-variant">Arquitectura por capas y encapsulamiento de datos.</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4 hover:border-primary transition-all cursor-pointer">
+<div class="w-12 h-12 bg-surface-container-high rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined">numbers</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">1.2 Direccionamiento IPv4 e IPv6</h4>
+<p class="text-sm text-on-surface-variant">Subnetting, máscaras y transición al nuevo protocolo.</p>
+</div>
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="group bg-surface-container-lowest border border-outline-variant p-4 rounded-xl flex items-center gap-4 hover:border-primary border-l-4 border-l-primary/40 transition-all cursor-pointer">
+<div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">settings_input_component</span>
+</div>
+<div class="flex-1">
+<h4 class="font-bold">1.3 Configuración de Switches y Routers</h4>
+<p class="text-sm text-on-surface-variant">Modos de consola, configuración básica e interfaces.</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant">arrow_forward</span>
+</div>
+</div>
+</div>
+<!-- Interactive Activities Section -->
+<div class="space-y-4 pt-4">
+<div class="flex items-center justify-between">
+<h3 class="font-headline-md font-bold flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">extension</span>
+                                        Actividades Interactivas
+                                    </h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Activity Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col group hover:shadow-lg transition-shadow">
+<div class="h-32 bg-surface-container-high relative">
+<img alt="Network topology diagram" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUoTFKPNGRS0iF1Np4hivkq4N4I6cC1S_2FPXmzZBpXBqDGGQ3UIT_sUhVEzw9FppFcK2vsgCLtwDOrnVIzvRHaEEP1cLI64hWPpeEBcKn2Z8hNlsT4kM4LAxxQatuR7AVJZzJROjh0RJ6SayuAZdh9rvuIsTr4NzlaXS3qvvs9OO5XzMWxvqtazUS83ISH4lsYK_TrDSLDV_xp1AIbx9BwEoGFKNQ3Nuoh8LlH7Gf-jyd7vbf4VkQQh0kFkp3yAMQrrlA_MVhBU8"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white text-primary rounded-full px-4 py-2 font-bold text-sm">Abrir Diagrama</button>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<h4 class="font-bold mb-1">Diseño de Topología LAN</h4>
+<p class="text-xs text-on-surface-variant mb-4">Crea una red eficiente usando el modelo jerárquico.</p>
+<div class="mt-auto">
+<div class="flex justify-between text-xs font-bold mb-1">
+<span class="">Progreso</span>
+<span class="">100%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full">
+<div class="bg-primary h-2 rounded-full" style="width: 100%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity Card 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden flex flex-col group hover:shadow-lg transition-shadow">
+<div class="h-32 bg-surface-container-high relative">
+<img alt="Terminal console interface" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_PW5ju_jxGtlJKgkFVj-bhOQIyZh6-Kzxpe1UzklQRktHTl8-6wgCwrLZxK3a8l3cX2fD02r6c3uEkwwG2sY2we7KcWvtc_yKMn_GOmHp3TTeb5P-rvO0sLMqHiaOWcc6GenWE1YQSy8WsPWwXLQQ5Aa2Bqj-L-XMFxoAOBZWo3V8jELMYcd9HNKvjPOKJJ_9mOcwOBezoX2AGA-M2niFdAxpO7F5GFTa7iEHrjXTUTMtUH05Xs-cC_kvSrCwIqXqlds7mA8bfmA"/>
+<div class="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="bg-white text-primary rounded-full px-4 py-2 font-bold text-sm">Ejecutar Consola</button>
+</div>
+</div>
+<div class="p-4 flex-1 flex flex-col">
+<h4 class="font-bold mb-1">Simulador de Comandos de Red</h4>
+<p class="text-xs text-on-surface-variant mb-4">Practica comandos Cisco IOS en tiempo real.</p>
+<div class="mt-auto">
+<div class="flex justify-between text-xs font-bold mb-1">
+<span class="">Progreso</span>
+<span class="">40%</span>
+</div>
+<div class="w-full bg-surface-container-high h-2 rounded-full">
+<div class="bg-primary h-2 rounded-full" style="width: 40%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- AI Assistant Sidebar -->
+<aside class="w-full md:w-80 h-full bg-surface border-l border-outline-variant flex flex-col">
+<div class="p-4 border-b border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">smart_toy</span>
+<h3 class="font-bold text-on-surface">Asistente AI</h3>
+</div>
+<span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
+<!-- Bot Message -->
+<div class="flex flex-col items-start gap-1">
+<div class="bg-surface-container-high p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-sm max-w-[90%]">¡Hola! Soy tu asistente de RITM-IA. ¿Tienes alguna duda sobre <strong>Planificación de Redes</strong>, VLANs o Subnetting?</div>
+<span class="text-[10px] text-on-surface-variant ml-1">Ahora mismo</span>
+</div>
+<!-- User Message -->
+<div class="flex flex-col items-end gap-1">
+<div class="bg-primary text-white p-3 rounded-tl-xl rounded-bl-xl rounded-br-xl text-sm max-w-[90%] shadow-md">
+                            ¿Cuál es la diferencia principal entre una VLAN y una subred?
+                        </div>
+<span class="text-[10px] text-on-surface-variant mr-1">Hace 1 min</span>
+</div>
+<!-- Bot Response -->
+<div class="flex flex-col items-start gap-1">
+<div class="bg-surface-container-high p-3 rounded-tr-xl rounded-bl-xl rounded-br-xl text-sm max-w-[90%]">
+                            Buena pregunta. Una <strong>VLAN</strong> opera en la Capa 2 (Enlace) para aislar dominios de difusión físicamente, mientras que una <strong>subred</strong> es un concepto de Capa 3 (Red) para agrupar direcciones IP. Normalmente, se asigna una subred distinta a cada VLAN.
+                        </div>
+<span class="text-[10px] text-on-surface-variant ml-1">Hace unos segundos</span>
+</div>
+</div>
+<!-- Input area -->
+<div class="p-4 border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex flex-wrap gap-2 mb-3">
+<button class="text-[10px] bg-surface-container-high hover:bg-outline-variant px-2 py-1 rounded-full transition-colors">VLAN Tagging (802.1Q)</button>
+<button class="text-[10px] bg-surface-container-high hover:bg-outline-variant px-2 py-1 rounded-full transition-colors">Cálculo de Máscaras</button>
+</div>
+<div class="relative flex items-center">
+<textarea class="w-full bg-surface-container-low border-none rounded-xl text-sm p-3 pr-10 focus:ring-2 focus:ring-primary resize-none h-12 leading-tight flex items-center" placeholder="Pregunta sobre ASIR..."></textarea>
+<button class="absolute right-2 text-primary hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</aside>
+</main>
+</div>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-outline-variant flex justify-around items-center h-16 z-50">
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Inicio</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="text-[10px] font-bold">Unidades</span>
+</a>
+<button class="bg-primary text-white w-12 h-12 rounded-full -mt-8 shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-[10px] font-bold">Logros</span>
+</a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Perfil</span>
+</a>
+</nav>
+<script>
+        // Micro-interactions and simple state handling
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('click', () => {
+                console.log('Navigating to ASIR module or lab...');
+            });
+        });
+
+        // Accessibility toggle simulation
+        const accessibilityBtn = document.querySelector('[title="Accesibilidad"]');
+        accessibilityBtn.addEventListener('click', () => {
+            document.body.classList.toggle('adhd-mode');
+            if (document.body.classList.contains('adhd-mode')) {
+                console.log('ADHD Focus Mode Active - Increased legibility for networking docs');
+            }
+        });
+    </script>
+</body></html>

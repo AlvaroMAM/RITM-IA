@@ -1,0 +1,110 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-ritm_ia}
+      POSTGRES_USER: ${POSTGRES_USER:-ritm_ia}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ritm_ia} -d ${POSTGRES_DB:-ritm_ia}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ritm-ia
+    restart: unless-stopped
+
+  ai-service:
+    build:
+      context: ./ai-service
+    environment:
+      AI_PROVIDER: ${AI_PROVIDER:-ollama}
+      AI_TIMEOUT_SECONDS: ${AI_TIMEOUT_SECONDS:-300}
+      OLLAMA_BASE_URL: ${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      OLLAMA_MODEL: ${OLLAMA_MODEL:-gemma3:4b}
+      OLLAMA_TIMEOUT_SECONDS: ${OLLAMA_TIMEOUT_SECONDS:-300}
+      GEMINI_API_URL: ${GEMINI_API_URL:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      GEMINI_MODEL: ${GEMINI_MODEL:-gemini-1.5-flash}
+      PIPER_BASE_URL: ${PIPER_BASE_URL:-}
+      PIPER_TTS_URL: ${PIPER_TTS_URL:-}
+      PIPER_VOICE: ${PIPER_VOICE:-es_ES-sharvard-medium}
+      MERMAID_RENDER_URL: ${MERMAID_RENDER_URL:-}
+      FLUX_API_URL: ${FLUX_API_URL:-}
+      COMFYUI_BASE_URL: ${COMFYUI_BASE_URL:-http://host.docker.internal:8188}
+      COMFYUI_PROMPT_URL: ${COMFYUI_PROMPT_URL:-}
+      COMFYUI_WORKFLOW_JSON: ${COMFYUI_WORKFLOW_JSON:-}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8001/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ritm-ia
+    restart: unless-stopped
+
+  piper:
+    profiles: ["media"]
+    build:
+      context: ./piper-service
+    environment:
+      PIPER_VOICE: ${PIPER_VOICE:-es_ES-sharvard-medium}
+      PIPER_DATA_DIR: /voices
+    volumes:
+      - piper_voices:/voices
+    ports:
+      - "5000:5000"
+    networks:
+      - ritm-ia
+    restart: unless-stopped
+
+  server:
+    build:
+      context: ./server
+    environment:
+      DATABASE_URL: ${DATABASE_URL:-postgresql+psycopg://ritm_ia:change-me@db:5432/ritm_ia}
+      AI_SERVICE_URL: ${AI_SERVICE_URL:-http://ai-service:8001}
+      AI_SERVICE_TIMEOUT_SECONDS: ${AI_SERVICE_TIMEOUT_SECONDS:-300}
+      APP_ENV: ${APP_ENV:-demo}
+      DEMO_RESET_ENABLED: ${DEMO_RESET_ENABLED:-true}
+      DEMO_SEED_VERSION: ${DEMO_SEED_VERSION:-mvp-recording-v1}
+      UPLOAD_DIR: /app/uploads
+    volumes:
+      - uploads_data:/app/uploads
+    depends_on:
+      db:
+        condition: service_healthy
+      ai-service:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks:
+      - ritm-ia
+    restart: unless-stopped
+
+  client:
+    build:
+      context: .
+      dockerfile: client.Dockerfile
+    depends_on:
+      server:
+        condition: service_healthy
+    ports:
+      - "5173:80"
+    networks:
+      - ritm-ia
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  uploads_data:
+  piper_voices:
+
+networks:
+  ritm-ia:
+    driver: bridge

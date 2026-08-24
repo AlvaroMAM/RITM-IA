@@ -1,0 +1,240 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --color-background: 252 249 242;
+  --color-surface: 255 255 255;
+  --color-surface-low: 246 243 236;
+  --color-surface-high: 235 232 225;
+  --color-primary: 0 80 46;
+  --color-primary-strong: 0 107 63;
+  --color-secondary: 0 109 61;
+  --color-tertiary: 147 72 0;
+  --color-outline: 111 122 113;
+  --color-outline-soft: 190 201 191;
+  --color-text: 28 28 24;
+  --color-text-muted: 63 73 65;
+  --color-danger: 186 26 26;
+  --font-scale: 1;
+  --space-scale: 1;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --color-background: 27 31 27;
+  --color-surface: 35 40 35;
+  --color-surface-low: 45 51 45;
+  --color-surface-high: 57 64 57;
+  --color-primary: 129 217 162;
+  --color-primary-strong: 157 245 189;
+  --color-secondary: 65 225 140;
+  --color-tertiary: 255 183 133;
+  --color-outline: 166 177 167;
+  --color-outline-soft: 86 98 89;
+  --color-text: 243 240 233;
+  --color-text-muted: 210 220 210;
+}
+
+html[data-contrast="high"] {
+  --color-background: 255 255 255;
+  --color-surface: 255 255 255;
+  --color-surface-low: 242 242 242;
+  --color-surface-high: 226 226 226;
+  --color-primary: 0 74 38;
+  --color-primary-strong: 0 63 32;
+  --color-secondary: 0 78 144;
+  --color-outline: 35 35 35;
+  --color-outline-soft: 91 91 91;
+  --color-text: 0 0 0;
+  --color-text-muted: 22 22 22;
+}
+
+html[data-theme="dark"][data-contrast="high"] {
+  --color-background: 0 0 0;
+  --color-surface: 11 11 11;
+  --color-surface-low: 24 24 24;
+  --color-surface-high: 42 42 42;
+  --color-primary: 152 255 190;
+  --color-primary-strong: 182 255 209;
+  --color-secondary: 142 204 255;
+  --color-outline: 230 230 230;
+  --color-outline-soft: 150 150 150;
+  --color-text: 255 255 255;
+  --color-text-muted: 238 238 238;
+}
+
+html[data-reading-font="dyslexia"] {
+  font-family: "Comic Sans MS", "Verdana", "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+html[data-color-vision="protanopia"] {
+  --color-primary: 0 84 117;
+  --color-primary-strong: 0 105 145;
+  --color-secondary: 0 94 72;
+  --color-tertiary: 128 82 0;
+}
+
+html[data-color-vision="deuteranopia"] {
+  --color-primary: 0 76 128;
+  --color-primary-strong: 0 96 160;
+  --color-secondary: 76 80 150;
+  --color-tertiary: 132 75 0;
+}
+
+html[data-color-vision="tritanopia"] {
+  --color-primary: 0 87 53;
+  --color-primary-strong: 0 116 70;
+  --color-secondary: 114 56 130;
+  --color-tertiary: 145 64 0;
+}
+
+html[data-color-vision="achromatopsia"] {
+  --color-background: 250 250 250;
+  --color-surface: 255 255 255;
+  --color-surface-low: 241 241 241;
+  --color-surface-high: 224 224 224;
+  --color-primary: 24 24 24;
+  --color-primary-strong: 0 0 0;
+  --color-secondary: 70 70 70;
+  --color-tertiary: 102 102 102;
+  --color-outline: 55 55 55;
+  --color-outline-soft: 156 156 156;
+  --color-text: 0 0 0;
+  --color-text-muted: 35 35 35;
+}
+
+html[data-theme="dark"][data-color-vision="achromatopsia"] {
+  --color-background: 0 0 0;
+  --color-surface: 15 15 15;
+  --color-surface-low: 28 28 28;
+  --color-surface-high: 48 48 48;
+  --color-primary: 238 238 238;
+  --color-primary-strong: 255 255 255;
+  --color-secondary: 198 198 198;
+  --color-tertiary: 156 156 156;
+  --color-outline: 230 230 230;
+  --color-outline-soft: 140 140 140;
+  --color-text: 255 255 255;
+  --color-text-muted: 235 235 235;
+}
+
+html[data-text-size="small"] {
+  --font-scale: 0.94;
+}
+
+html[data-text-size="large"] {
+  --font-scale: 1.12;
+}
+
+html[data-text-size="xlarge"] {
+  --font-scale: 1.24;
+}
+
+html[data-spacing="wide"] {
+  --space-scale: 1.3;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Atkinson Hyperlegible Next", "Atkinson Hyperlegible", ui-sans-serif, system-ui, sans-serif;
+  background: rgb(var(--color-background));
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: rgb(var(--color-background));
+  color: rgb(var(--color-text));
+  font-size: calc(16px * var(--font-scale));
+  line-height: calc(1.5 * var(--space-scale));
+}
+
+body.reduce-motion *,
+body.reduce-motion *::before,
+body.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  scroll-behavior: auto !important;
+  transition-duration: 0.001ms !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+:focus-visible {
+  outline: 3px solid rgb(var(--color-primary));
+  outline-offset: 3px;
+}
+
+::selection {
+  background: rgb(var(--color-primary-strong));
+  color: white;
+}
+
+.focus-mode .optional-chrome,
+.focus-mode .decorative-surface {
+  display: none;
+}
+
+.focus-mode main {
+  max-width: 980px;
+}
+
+@layer components {
+  .page-title {
+    @apply text-3xl font-bold leading-tight tracking-normal text-primary md:text-4xl;
+  }
+
+  .section-title {
+    @apply text-xl font-bold leading-tight text-text md:text-2xl;
+  }
+
+  .card {
+    @apply rounded-lg border border-outline-soft bg-surface shadow-[0_1px_2px_rgb(31_49_39_/_0.04)];
+  }
+
+  .button-primary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-primary px-5 py-3 font-bold text-white transition hover:bg-primary-strong active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-secondary {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md border-2 border-primary px-5 py-3 font-bold text-primary transition hover:bg-primary/10 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  .button-ghost {
+    @apply inline-flex min-h-12 items-center justify-center gap-2 rounded-md px-4 py-3 font-bold text-primary transition hover:bg-primary/10 active:scale-[0.98];
+  }
+
+  .field-label {
+    @apply mb-2 block text-sm font-bold text-text;
+  }
+
+  .field {
+    @apply min-h-12 w-full rounded-md border border-outline-soft bg-surface-low px-4 py-3 text-text transition placeholder:text-text-muted focus:border-primary focus:ring-2 focus:ring-primary/40;
+  }
+
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-md bg-surface-high px-3 py-1 text-sm font-bold text-text-muted;
+  }
+
+  .route-shell {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at top right, rgb(var(--color-primary) / 0.05), transparent 30rem),
+      rgb(var(--color-background));
+  }
+}
